@@ -32,9 +32,11 @@ window.addEventListener("devicemotion", (event) => {
   sensval["accz"] = event.acceleration.z;
 });
 
-document.querySelector("#toggle").addEvenListener("onclick", (event) => {
-  toggle();
-});
-document.querySelector("#reset").addEvenListener("onclick", (event) => {
-  reset();
+window.addEventListener("onload", (event) => {
+  document.querySelector("#toggle").addEvenListener("onclick", (event) => {
+    toggle();
+  });
+  document.querySelector("#reset").addEvenListener("onclick", (event) => {
+    reset();
+  });
 });
