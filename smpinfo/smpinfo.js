@@ -3,7 +3,7 @@ let running = false;
 let sensval = {"accx" : null, "accy" : null, "accz" : null};
 
 async function reset() {
-  document.querySelector("#result").innerHTML = "";
+  document.querySelector("#result").value = "";
 }
 
 async function toggle() {
@@ -20,8 +20,8 @@ async function toggle() {
 
 async function writesensors() {
   while(running) {
-    document.querySelector("#result").innerHTML += sensval["accx"] + "," + sensval["accy"] + "," + sensval["accz"];
-    document.querySelector("#result").innerHTML += "\n";
+    document.querySelector("#result").value += sensval["accx"] + "," + sensval["accy"] + "," + sensval["accz"];
+    document.querySelector("#result").value += "\n";
     await sleep(100);
   }
 }
