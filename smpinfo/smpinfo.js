@@ -33,10 +33,10 @@ window.addEventListener("devicemotion", (event) => {
 });
 
 window.addEventListener("onload", (event) => {
-  document.querySelector("#toggle").addEvenListener("onclick", (event) => {
+  document.querySelector("#toggle").addEventListener("onclick", (event) => {
     toggle();
   });
-  document.querySelector("#reset").addEvenListener("onclick", (event) => {
+  document.querySelector("#reset").addEventListener("onclick", (event) => {
     reset();
   });
 });
