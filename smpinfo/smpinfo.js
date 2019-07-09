@@ -26,8 +26,15 @@ async function writesensors() {
   }
 }
 
-window.addEventListener("devicemotion", event => {
+window.addEventListener("devicemotion", (event) => {
   sensval["accx"] = event.acceleration.x;
   sensval["accy"] = event.acceleration.y;
   sensval["accz"] = event.acceleration.z;
+});
+
+document.querySelector("#toggle").addEvenListener("onclick", (event) => {
+  toggle();
+});
+document.querySelector("#reset").addEvenListener("onclick", (event) => {
+  reset();
 });
