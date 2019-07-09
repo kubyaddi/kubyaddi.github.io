@@ -26,7 +26,7 @@ async function writesensors() {
   }
 }
 
-window.addEventListener("devicemotion", event = {
+window.addEventListener("devicemotion", event => {
   sensval["accx"] = event.acceleration.x;
   sensval["accy"] = event.acceleration.y;
   sensval["accz"] = event.acceleration.z;
