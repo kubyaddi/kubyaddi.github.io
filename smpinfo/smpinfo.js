@@ -26,6 +26,17 @@ async function writesensors() {
   }
 }
 
+async function download() {
+  const csv_data = document.querySelector("#result").innerHTML.split("<br>").join("\n");
+  const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+  const blob = new Blob([bom, csv_data], { type: 'text/csv' });
+  const url = (window.URL || window.webkitURL).createObjectURL(blob);
+  let a = document.querySelector("#download_a");
+  a.download = 'data.csv';
+  a.href = url;
+  a.click();
+}
+
 window.addEventListener("devicemotion", (event) => {
   sensval["accx"] = event.acceleration.x;
   sensval["accy"] = event.acceleration.y;
@@ -38,5 +49,8 @@ window.addEventListener("load", (event) => {
   });
   document.querySelector("#reset").addEventListener("click", (event) => {
     reset();
+  });
+  document.querySelector("#download").addEventListener("click", (event) => {
+    download();
   });
 });
