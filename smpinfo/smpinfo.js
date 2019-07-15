@@ -37,6 +37,21 @@ async function download() {
   a.click();
 }
 
+async function copy() {
+  const csv_data = document.querySelector("#result").innerHTML.split("<br>").join("\n");
+  var tmp = document.createElement("div");
+  var pre = document.createElement('pre');
+  pre.style.webkitUserSelect = 'auto';
+  pre.style.userSelect = 'auto';
+  tmp.appendChild(pre).textContent = csv_data;
+  tmp.style.position = 'fixed';
+  tmp.style.right = '200%';
+  document.body.appendChild(tmp);
+  document.getSelection().selectAllChildren(tmp);
+  document.execCommand("copy");
+  document.body.removeChild(tmp);
+}
+
 window.addEventListener("devicemotion", (event) => {
   sensval["accx"] = event.acceleration.x;
   sensval["accy"] = event.acceleration.y;
@@ -52,5 +67,8 @@ window.addEventListener("load", (event) => {
   });
   document.querySelector("#download").addEventListener("click", (event) => {
     download();
+  });
+  document.querySelector("#copy").addEventListener("click", (event) => {
+    copy();
   });
 });
