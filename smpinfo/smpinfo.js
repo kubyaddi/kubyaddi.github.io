@@ -85,4 +85,5 @@ window.addEventListener("load", (event) => {
   document.querySelector("#copy").addEventListener("click", (event) => {
     copy();
   });
+  reset();
 });
