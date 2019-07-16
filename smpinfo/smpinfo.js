@@ -1,9 +1,11 @@
 const sleep = msec => new Promise(resolve => setTimeout(resolve, msec));
 let running = false;
-let sensval = {"accx" : null, "accy" : null, "accz" : null};
+let sensval = {"accGx" : null, "accGy" : null, "accGz" : null,
+               "accx" : null, "accy" : null, "accz" : null,
+               "oralpha" : null, "orbeta" : null, "orgamma" : null};
 
 async function reset() {
-  document.querySelector("#result").innerHTML = "";
+  document.querySelector("#result").innerHTML = "accx, accy, accz, accGx, accGy, accGz, alpha, beta, gamma<br>";
 }
 
 async function toggle() {
@@ -20,7 +22,10 @@ async function toggle() {
 
 async function writesensors() {
   while(running) {
-    document.querySelector("#result").innerHTML += sensval["accx"] + "," + sensval["accy"] + "," + sensval["accz"];
+    document.querySelector("#result").innerHTML +=
+      sensval["accx"] + "," + sensval["accy"] + "," + sensval["accz"] + ", " +
+      sensval["accGx"] + "," + sensval["accGy"] + "," + sensval["accGz"] + ", " +
+      sensval["oralpha"] + "," + sensval["orbeta"] + "," + sensval["orgamma"];
     document.querySelector("#result").innerHTML += "<br>";
     await sleep(100);
   }
@@ -53,9 +58,18 @@ async function copy() {
 }
 
 window.addEventListener("devicemotion", (event) => {
+  sensval["accGx"] = event.accelerationIncludingGravity.x;
+  sensval["accGy"] = event.accelerationIncludingGravity.y;
+  sensval["accGz"] = event.accelerationIncludingGravity.z;
   sensval["accx"] = event.acceleration.x;
   sensval["accy"] = event.acceleration.y;
   sensval["accz"] = event.acceleration.z;
+});
+
+window.addEventListener("deviceorientation", (event) => {
+  sensval["oralpha"] = event.alpha;
+  sensval["orbeta"] = event.beta;
+  sensval["orgamma"] = event.gamma;
 });
 
 window.addEventListener("load", (event) => {
